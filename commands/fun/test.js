@@ -5,19 +5,23 @@ module.exports = {
         .setName('roller')
         .setDescription('Returns a value between a given range')
         .addIntegerOption(option =>
-            option.setName('Lower')
+            option
+                .setName('lower')
                 .setDescription('The lower bound')
                 .setRequired(true))
         .addIntegerOption(option =>
-            option.setName('Upper')
+            option
+                .setName('upper')
                 .setDescription('The upper bound')
                 .setRequired(true)),
+
     async execute(interaction) {
         let num;
 
-        
-        
-        num = Math.floor(Math.random() * 6);
+        const low = interaction.options.getInteger('lower');
+        const high = interaction.options.getInteger('upper');
+
+        num = Math.floor(Math.random() * high) + low;
 
         await interaction.reply('You rolled a: ' + num.toString());
     }
